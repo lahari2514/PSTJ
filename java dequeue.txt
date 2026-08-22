@@ -1,0 +1,42 @@
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt(); // Total number of integers
+        int k = sc.nextInt(); // Size of subarray
+
+        Deque<Integer> deque = new ArrayDeque<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        int maxUnique = 0;
+
+        for (int i = 0; i < n; i++) {
+            int num = sc.nextInt();
+
+            // Add new number
+            deque.addLast(num);
+            map.put(num, map.getOrDefault(num, 0) + 1);
+
+            // Remove first element if window size exceeds k
+            if (deque.size() > k) {
+                int removed = deque.removeFirst();
+
+                map.put(removed, map.get(removed) - 1);
+
+                if (map.get(removed) == 0) {
+                    map.remove(removed);
+                }
+            }
+
+            // Check maximum unique elements
+            if (deque.size() == k) {
+                maxUnique = Math.max(maxUnique, map.size());
+            }
+        }
+
+        System.out.println(maxUnique);
+        sc.close();
+    }
+}
