@@ -1,0 +1,18 @@
+import java.time.LocalDate;
+import java.time.DayOfWeek;
+
+public class Solution {
+    public String dayOfTheWeek(int day, int month, int year) {
+        // Create LocalDate from inputs
+        LocalDate date = LocalDate.of(year, month, day);
+
+        // Get the day of week
+        DayOfWeek dow = date.getDayOfWeek();
+
+        // Return with first letter capitalized, rest lowercase
+        String name = dow.toString().substring(0,1).toUpperCase() 
+                    + dow.toString().substring(1).toLowerCase();
+
+        return name;
+    }
+}

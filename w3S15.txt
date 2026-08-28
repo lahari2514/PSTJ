@@ -1,0 +1,38 @@
+import java.util.*;
+
+public class Solution {
+    public String[] sortPeople(String[] names, int[] heights) {
+        int n = names.length;
+        // Pair names with heights
+        String[][] arr = new String[n][2];
+        for (int i = 0; i < n; i++) {
+            arr[i][0] = names[i];
+            arr[i][1] = String.valueOf(heights[i]);
+        }
+
+        // Sort by height descending
+        Arrays.sort(arr, (a, b) -> Integer.parseInt(b[1]) - Integer.parseInt(a[1]));
+
+        // Extract sorted names
+        String[] result = new String[n];
+        for (int i = 0; i < n; i++) {
+            result[i] = arr[i][0];
+        }
+        return result;
+    }
+
+    // For testing
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        String[] names1 = {"Mary","John","Emma"};
+        int[] heights1 = {180,165,170};
+        System.out.println(Arrays.toString(sol.sortPeople(names1, heights1)));
+        // Output: ["Mary","Emma","John"]
+
+        String[] names2 = {"Alice","Bob","Bob"};
+        int[] heights2 = {155,185,150};
+        System.out.println(Arrays.toString(sol.sortPeople(names2, heights2)));
+        // Output: ["Bob","Alice","Bob"]
+    }
+}
