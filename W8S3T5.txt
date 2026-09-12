@@ -1,0 +1,17 @@
+public static void func(ArrayList mylist) {
+    Iterator it = mylist.iterator();
+    boolean found = false;
+
+    while (it.hasNext()) {
+        Object element = it.next();
+
+        if (element.equals("###")) {
+            found = true;
+            continue;
+        }
+
+        if (found) {
+            System.out.println((String) element);
+        }
+    }
+}
