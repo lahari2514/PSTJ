@@ -1,0 +1,48 @@
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    static int migratoryBirds(List<Integer> arr) {
+
+        int[] count = new int[6];
+
+        // Count frequency of each bird type
+        for (int bird : arr) {
+            count[bird]++;
+        }
+
+        int max = 0;
+        int answer = 0;
+
+        // Find highest frequency
+        // Since we go from small ID to large ID,
+        // the smallest ID is automatically selected in case of a tie.
+        for (int i = 1; i <= 5; i++) {
+            if (count[i] > max) {
+                max = count[i];
+                answer = i;
+            }
+        }
+
+        return answer;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+
+        List<Integer> arr = new ArrayList<Integer>();
+
+        for (int i = 0; i < n; i++) {
+            arr.add(sc.nextInt());
+        }
+
+        System.out.println(migratoryBirds(arr));
+
+        sc.close();
+    }
+}
+

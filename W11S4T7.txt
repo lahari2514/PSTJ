@@ -1,0 +1,19 @@
+
+class Result {
+
+    public static void preOrder(Node root) {
+        if (root == null) {
+            return;
+        }
+
+        // Print root
+        System.out.print(root.data + " ");
+
+        // Traverse left subtree
+        preOrder(root.left);
+
+        // Traverse right subtree
+        preOrder(root.right);
+    }
+}
+

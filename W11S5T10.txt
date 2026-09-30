@@ -1,0 +1,92 @@
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    static class Graph {
+        int nodes;
+        ArrayList<Integer>[] adj;
+
+        Graph(int size) {
+            nodes = size;
+            adj = new ArrayList[size + 1];
+
+            for (int i = 1; i <= size; i++) {
+                adj[i] = new ArrayList<Integer>();
+            }
+        }
+
+        void addEdge(int u, int v) {
+            adj[u].add(v);
+            adj[v].add(u);
+        }
+
+        int[] shortestReach(int start) {
+
+            int[] distance = new int[nodes + 1];
+
+            Arrays.fill(distance, -1);
+
+            Queue<Integer> queue = new LinkedList<Integer>();
+
+            distance[start] = 0;
+            queue.add(start);
+
+            while (!queue.isEmpty()) {
+
+                int current = queue.poll();
+
+                for (int next : adj[current]) {
+
+                    if (distance[next] == -1) {
+
+                        distance[next] = distance[current] + 6;
+                        queue.add(next);
+                    }
+                }
+            }
+
+            return distance;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int queries = sc.nextInt();
+
+        while (queries-- > 0) {
+
+            int n = sc.nextInt();
+            int m = sc.nextInt();
+
+            Graph graph = new Graph(n);
+
+            for (int i = 0; i < m; i++) {
+
+                int u = sc.nextInt();
+                int v = sc.nextInt();
+
+                graph.addEdge(u, v);
+            }
+
+            int start = sc.nextInt();
+
+            int[] distance = graph.shortestReach(start);
+
+            for (int i = 1; i <= n; i++) {
+
+                if (i != start) {
+                    System.out.print(distance[i] + " ");
+                }
+            }
+
+            System.out.println();
+        }
+
+        sc.close();
+    }
+}
+

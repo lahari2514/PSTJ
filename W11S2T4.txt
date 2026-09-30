@@ -1,0 +1,61 @@
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+
+        ArrayList<ArrayList<Object>> students = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            String name = sc.next();
+            double grade = sc.nextDouble();
+
+            ArrayList<Object> student = new ArrayList<>();
+            student.add(name);
+            student.add(grade);
+
+            students.add(student);
+        }
+
+        // Store all grades
+        ArrayList<Double> grades = new ArrayList<>();
+
+        for (ArrayList<Object> student : students) {
+            double grade = (double) student.get(1);
+
+            if (!grades.contains(grade)) {
+                grades.add(grade);
+            }
+        }
+
+        // Sort grades
+        Collections.sort(grades);
+
+        // Second lowest grade
+        double secondLowest = grades.get(1);
+
+        // Store names having second lowest grade
+        ArrayList<String> names = new ArrayList<>();
+
+        for (ArrayList<Object> student : students) {
+            String name = (String) student.get(0);
+            double grade = (double) student.get(1);
+
+            if (grade == secondLowest) {
+                names.add(name);
+            }
+        }
+
+        // Alphabetical order
+        Collections.sort(names);
+
+        // Print names
+        for (String name : names) {
+            System.out.println(name);
+        }
+
+        sc.close();
+    }
+}
