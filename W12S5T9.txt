@@ -1,0 +1,84 @@
+class MyHashMap {
+
+    // Node stores key, value and reference to next node
+    class Node {
+        int key;
+        int value;
+        Node next;
+
+        Node(int key, int value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
+
+    private final int SIZE = 1000;
+    private Node[] table;
+
+    /** Initialize your data structure here. */
+    public MyHashMap() {
+        table = new Node[SIZE];
+    }
+
+    /** Put key-value pair */
+    public void put(int key, int value) {
+        int index = key % SIZE;
+
+        // If key already exists, update value
+        Node current = table[index];
+
+        while (current != null) {
+            if (current.key == key) {
+                current.value = value;
+                return;
+            }
+            current = current.next;
+        }
+
+        // Key doesn't exist, add new node
+        Node newNode = new Node(key, value);
+        newNode.next = table[index];
+        table[index] = newNode;
+    }
+
+    /** Get value for key */
+    public int get(int key) {
+        int index = key % SIZE;
+
+        Node current = table[index];
+
+        while (current != null) {
+            if (current.key == key) {
+                return current.value;
+            }
+            current = current.next;
+        }
+
+        return -1;
+    }
+
+    /** Remove key-value pair */
+    public void remove(int key) {
+        int index = key % SIZE;
+
+        Node current = table[index];
+        Node previous = null;
+
+        while (current != null) {
+            if (current.key == key) {
+
+                // If first node
+                if (previous == null) {
+                    table[index] = current.next;
+                } else {
+                    previous.next = current.next;
+                }
+
+                return;
+            }
+
+            previous = current;
+            current = current.next;
+        }
+    }
+}

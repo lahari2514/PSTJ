@@ -1,0 +1,35 @@
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static List<Integer> matchingStrings(
+            List<String> stringList,
+            List<String> queries) {
+
+        HashMap<String, Integer> map = new HashMap<String, Integer>();
+
+        // Count each string
+        for (String s : stringList) {
+            if (map.containsKey(s)) {
+                map.put(s, map.get(s) + 1);
+            } else {
+                map.put(s, 1);
+            }
+        }
+
+        List<Integer> result = new ArrayList<Integer>();
+
+        // Find count for each query
+        for (String q : queries) {
+            if (map.containsKey(q)) {
+                result.add(map.get(q));
+            } else {
+                result.add(0);
+            }
+        }
+
+        return result;
+    }
+}
